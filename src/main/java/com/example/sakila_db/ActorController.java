@@ -13,57 +13,42 @@ import java.util.List;
 @RestController
 public class ActorController {
 
-    // Repository
     @Autowired
-    private ActorRepository actorRepository;
+    private ActorService actorService;
 
-    @PostMapping("/actors")
-    public Actor createCustom(@Validated(Create class) @RequestBody ActorInput actorData) {
-        final var actor = new Actor();
-        actor.setFirstName(actorData.getFirstName());
-        actor.setLastName(actorData.getLastName());
-        return actorRepository.save(actor);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Actor createActor(
+            @Validated(ValidationGroup.Create.class) @RequestBody ActorInput actorInput) {
+        return actorService.createActor(actorInput);
     }
 
-//    @GetMapping("/actors")
-//    public List<Actor> readAll() {
-//        return actorRepository.findAll();
-//    }
-
-//    @GetMapping("/actors/{id}")
-//    public Actor findActor(@PathVariable short id) {
-//        return actorRepository.findById(id).get();
-//    }
-
-    @PutMapping("/actors/{id}")
-    public void updateActor(@PathVariable short id, @RequestBody ActorInput actorInput) {
-        Actor actor = actorRepository.getReferenceById(id);
-        actor.setFirstName(actorInput.getFirstName());
-        actor.setLastName(actorInput.getLastName());
-        actorRepository.save(actor);
+    @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateActor(
+            @PathVariable short id,
+            @RequestBody ActorInput actorInput) {
+        actorService.updateActor(id, actorInput);
     }
 
     @DeleteMapping("actors/{id}")
-    public void deleteActor(@PathVariable short id) {
-        actorRepository.deleteById(id);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteActor(
+            @PathVariable short id) {
+        actorService.deleteActor(id);
     }
 
     @GetMapping("/actors")
+    @ResponseStatus(HttpStatus.FOUND)
     public List<ActorResponse> readAllActors() {
-        return actorRepository.findAll()
-                .stream()
-                .map(ActorResponse::new)
-                .toList();
+        return actorService.readAllActors();
     }
 
     @GetMapping("/actors/{id}")
-    public ActorResponse readActorById(@PathVariable Short id) {
-        return actorRepository.findById(id)
-                .map(ActorResponse::new)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    @ResponseStatus(HttpStatus.FOUND)
+    public ActorResponse readActorById(
+            @PathVariable Short id) {
+        return actorService.readActorById(id);
     }
-
-
-
 
 }

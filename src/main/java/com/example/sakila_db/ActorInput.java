@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class ActorInput {
-    @NotNull(groups = {Create class})
+    @NotNull(groups = {ValidationGroup.Create.class})
     @Size(min = 1, max = 45)
     private String firstName;
 

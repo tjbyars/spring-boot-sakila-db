@@ -17,7 +17,7 @@ import java.util.List;
 public class FilmController {
 
     @Autowired
-    private FilmRepository filmRepo;
+    private FilmService filmService;
 
 //    @GetMapping("/films")
 //    public List<Film> readAll() {
@@ -29,48 +29,43 @@ public class FilmController {
 //        return filmRepo.findById(id).get();
 //    }
 
-    @GetMapping("/films")
-    public List<FilmResponse> readAllFilms() {
-        return filmRepo.findAll()
-                .stream()
-                .map(FilmResponse::new)
-                .toList();
-    }
-
-    @GetMapping("/films/{id}")
-    public FilmResponse readFilmById(@PathVariable Short id) {
-        return filmRepo.findById(id)
-                .map(FilmResponse::new)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
     @PostMapping("/films")
     public Film createFilm(@Validated @RequestBody Film film) {
-        return filmRepo.save(film);
+        return filmService.createFilm(film);
     }
 
     @PutMapping("/films/{id}")
-    public Film updateFilm(@PathVariable short id, @RequestBody Film filmData) {
-        BeanUtils.copyProperties(filmData, filmRepo.getReferenceById(id));
-        return filmRepo.save(filmRepo.getReferenceById(id));
+    public Film updateFilm(@PathVariable short id,
+                           @RequestBody Film filmData) {
+        return filmService.updateFilm(id, filmData);
     }
 
     @DeleteMapping("/films/{id}")
-    public void deleteFilm(@PathVariable short id) {
-        filmRepo.deleteById(id);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteFilm(
+            @PathVariable short id) {
+        filmService.deleteFilm(id);
     }
-
-//    public Film partUpdateFilm(@PathVariable short id, @RequestBody FilmInput filmInput) {
-//        Film film = filmRepo.getReferenceById(id);
-//        BeanUtils.copyProperties(filmInput, film);
-//        return filmRepo.save(film);
 
     @PatchMapping("/films/{id}")
-    public Film partUpdateFilm(@PathVariable short id, @RequestBody String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Film film = filmRepo.findById(id).orElseThrow();
-        ObjectReader objectReader = objectMapper.readerForUpdating(film);
-        film = objectReader.readValue(json);
-        return filmRepo.save(film);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Film partUpdateFilm(
+            @PathVariable short id,
+            @RequestBody String json) throws JsonProcessingException {
+        return filmService.partUpdateFilm(id, json);
     }
+
+    @GetMapping("/films")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<FilmResponse> readAllFilms() {
+        return filmService.readAllFilms();
+    }
+
+    @GetMapping("/films/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public FilmResponse readFilmById(
+            @PathVariable Short id) {
+        return filmService.readFilmById(id);
+    }
+
 }
