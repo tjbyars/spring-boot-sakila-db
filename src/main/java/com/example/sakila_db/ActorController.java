@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,7 +18,7 @@ public class ActorController {
     private ActorRepository actorRepository;
 
     @PostMapping("/actors")
-    public Actor createCustom(@RequestBody ActorInput actorData) {
+    public Actor createCustom(@Validated(Create class) @RequestBody ActorInput actorData) {
         final var actor = new Actor();
         actor.setFirstName(actorData.getFirstName());
         actor.setLastName(actorData.getLastName());

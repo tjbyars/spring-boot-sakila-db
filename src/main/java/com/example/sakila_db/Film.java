@@ -3,6 +3,7 @@ package com.example.sakila_db;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jdk.jfr.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class Film {
     private short id;
 
     @Setter
-    @NotNull
+//    @NotNull
     @Column(name = "title")
     private String title;
 
@@ -72,9 +73,20 @@ public class Film {
     @Column(name = "last_update")
     private Timestamp last_update;
 
+//    @Setter
+//    @Column(name = "category")
+//    private String category;
+
     @ManyToMany(mappedBy = "films")
     private List<Actor> cast = new ArrayList<>();
 
+//    @ManyToMany
+//    @JoinTable(
+//            name = "film_category",
+//            joinColumns = {@JoinColumn(name = "film_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "category")}
+//    )
+//    private List<Category> categories = new ArrayList<>();
 
 
 }

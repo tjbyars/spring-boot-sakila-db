@@ -6,7 +6,10 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,18 +19,33 @@ public class FilmController {
     @Autowired
     private FilmRepository filmRepo;
 
+//    @GetMapping("/films")
+//    public List<Film> readAll() {
+//        return filmRepo.findAll();
+//    }
+//
+//    @GetMapping("/films/{id}")
+//    public Film readFilm(@PathVariable short id) {
+//        return filmRepo.findById(id).get();
+//    }
+
     @GetMapping("/films")
-    public List<Film> readAll() {
-        return filmRepo.findAll();
+    public List<FilmResponse> readAllFilms() {
+        return filmRepo.findAll()
+                .stream()
+                .map(FilmResponse::new)
+                .toList();
     }
 
     @GetMapping("/films/{id}")
-    public Film readFilm(@PathVariable short id) {
-        return filmRepo.findById(id).get();
+    public FilmResponse readFilmById(@PathVariable Short id) {
+        return filmRepo.findById(id)
+                .map(FilmResponse::new)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/films")
-    public Film createFilm(@RequestBody Film film) {
+    public Film createFilm(@Validated @RequestBody Film film) {
         return filmRepo.save(film);
     }
 
