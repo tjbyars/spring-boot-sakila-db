@@ -2,8 +2,6 @@ package com.example.sakila_db;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Category;
 import lombok.Getter;
 import lombok.Setter;
 

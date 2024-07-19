@@ -1,19 +1,16 @@
 package com.example.sakila_db;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/films")
+@CrossOrigin
 public class FilmController {
 
     @Autowired
@@ -29,25 +26,25 @@ public class FilmController {
 //        return filmRepo.findById(id).get();
 //    }
 
-    @PostMapping("/films")
+    @PostMapping
     public Film createFilm(@Validated @RequestBody Film film) {
         return filmService.createFilm(film);
     }
 
-    @PutMapping("/films/{id}")
+    @PutMapping("/{id}")
     public Film updateFilm(@PathVariable short id,
                            @RequestBody Film filmData) {
         return filmService.updateFilm(id, filmData);
     }
 
-    @DeleteMapping("/films/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteFilm(
             @PathVariable short id) {
         filmService.deleteFilm(id);
     }
 
-    @PatchMapping("/films/{id}")
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Film partUpdateFilm(
             @PathVariable short id,
@@ -55,13 +52,13 @@ public class FilmController {
         return filmService.partUpdateFilm(id, json);
     }
 
-    @GetMapping("/films")
+    @GetMapping
     @ResponseStatus(HttpStatus.CREATED)
     public List<FilmResponse> readAllFilms() {
         return filmService.readAllFilms();
     }
 
-    @GetMapping("/films/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public FilmResponse readFilmById(
             @PathVariable Short id) {

@@ -1,21 +1,14 @@
 package com.example.sakila_db;
 
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Data
 public class FilmInput {
 
-    @NotNull
+    @NotNull(groups = ValidationGroup.Create.class)
     @Min(0)
     @Max(65535)
     private short id;

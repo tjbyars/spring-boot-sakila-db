@@ -2,6 +2,7 @@ package com.example.sakila_db;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "actor")
+@RequiredArgsConstructor
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +37,12 @@ public class Actor {
             inverseJoinColumns = {@JoinColumn(name = "film_id")}
     )
     private List<Film> films = new ArrayList<>();
+
+//    public Actor(short id, String firstName, String lastName, List<Film> films) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.films = films;
+//    }
 
 }

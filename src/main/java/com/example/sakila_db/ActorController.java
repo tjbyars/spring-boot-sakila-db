@@ -1,20 +1,20 @@
 package com.example.sakila_db;
 
-import jakarta.persistence.EntityManager;
-import org.springframework.beans.BeanUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/actors")
+@RequiredArgsConstructor
 public class ActorController {
 
     @Autowired
-    private ActorService actorService;
+    private final ActorService actorService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -23,7 +23,7 @@ public class ActorController {
         return actorService.createActor(actorInput);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateActor(
             @PathVariable short id,
@@ -31,20 +31,20 @@ public class ActorController {
         actorService.updateActor(id, actorInput);
     }
 
-    @DeleteMapping("actors/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteActor(
             @PathVariable short id) {
         actorService.deleteActor(id);
     }
 
-    @GetMapping("/actors")
+    @GetMapping
     @ResponseStatus(HttpStatus.FOUND)
     public List<ActorResponse> readAllActors() {
         return actorService.readAllActors();
     }
 
-    @GetMapping("/actors/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public ActorResponse readActorById(
             @PathVariable Short id) {

@@ -1,10 +1,12 @@
 package com.example.sakila_db;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class ActorResponse {
     private final Short id;
     private final String firstName;

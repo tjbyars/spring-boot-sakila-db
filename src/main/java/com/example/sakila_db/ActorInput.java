@@ -10,7 +10,7 @@ public class ActorInput {
     @Size(min = 1, max = 45)
     private String firstName;
 
-    @NotNull
+    @NotNull(groups = ValidationGroup.Create.class)
     @Size(min = 1, max = 45)
     private String lastName;
 
