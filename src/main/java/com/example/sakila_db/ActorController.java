@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173"})
 @RequestMapping("/actors")
 @RequiredArgsConstructor
 public class ActorController {
