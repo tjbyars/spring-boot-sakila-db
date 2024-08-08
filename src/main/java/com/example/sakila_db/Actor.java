@@ -38,11 +38,11 @@ public class Actor {
     )
     private List<Film> films = new ArrayList<>();
 
-//    public Actor(short id, String firstName, String lastName, List<Film> films) {
-//        this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.films = films;
-//    }
+    public Actor(short id, String firstName, String lastName, List<Film> films) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.films = films;
+    }
 
 }

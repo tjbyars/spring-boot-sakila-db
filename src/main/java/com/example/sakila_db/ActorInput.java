@@ -14,4 +14,8 @@ public class ActorInput {
     @Size(min = 1, max = 45)
     private String lastName;
 
+    public ActorInput(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
