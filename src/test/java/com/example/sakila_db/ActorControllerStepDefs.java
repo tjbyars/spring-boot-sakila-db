@@ -52,6 +52,8 @@ public class ActorControllerStepDefs {
 
     @Given("an invalid ActorInput request body")
     public void anInvalidActorInputRequestBody() {
+        // Not currently using due to issues with it
+        System.out.println(".");
     }
 
     @When("a GET request is made to actors for ID {short}")
