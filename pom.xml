@@ -118,6 +118,7 @@
 						<exclude>**/*PartialFilmResponse.*</exclude>
 						<exclude>**/*ActorService.*</exclude>
 						<exclude>**/*FilmService.*</exclude>
+						<exclude>**/*SakilaDemoProjectApplication.*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
