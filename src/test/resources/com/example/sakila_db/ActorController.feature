@@ -1,5 +1,3 @@
-
-
 Feature: ActorController
 
   Scenario: An actor is read by ID
@@ -21,14 +19,15 @@ Feature: ActorController
 #  Scenario: An invalid actor is created
 #    Given an invalid ActorInput request body
 #    When a POST request is made to the actors collection
-#    Then a ResponseStatusException is thrown
+#    Then the status code is 500
 
   Scenario: An actor is deleted
     Given an actor exists with ID 14
     When a DELETE request is made to the actors collection for ID 14
     Then no actor exists with ID 14
 
-#  Scenario: Deleting an actor that does not exist
-#    Given no actor exists with ID 43
-#    When a DELETE request is made to the actors collection for ID 43
+  Scenario: Deleting an actor that does not exist
+    Given no actor exists with ID 700
+    When a DELETE request is made to the actors collection for ID 700
 #    Then a ResponseStatusException is thrown
+#  Deletion doesn't check if valid, need to fix

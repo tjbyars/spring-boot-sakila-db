@@ -18,16 +18,15 @@ public class ActorControllerStepDefs {
     ActorResponse actualOutput;
     Exception caughtException;
     ActorInput actorInput;
-    ActorInput invalidActorInput;
     Actor actor;
-
 
     @Before
     public void setup() {
         mockService = mock(ActorService.class);
         controller = new ActorController(mockService);
+        mockFilmService = mock(FilmService.class);
+        filmController = new FilmController();
     }
-
 
     @Given("an actor exists with ID {short}")
     public void anActorExistsWithID(short actorId) {
@@ -54,8 +53,6 @@ public class ActorControllerStepDefs {
     @Given("an invalid ActorInput request body")
     public void anInvalidActorInputRequestBody() {
     }
-
-
 
     @When("a GET request is made to actors for ID {short}")
     public void aGETRequestIsMadeToActors(short actorId) {
@@ -85,8 +82,6 @@ public class ActorControllerStepDefs {
         }
     }
 
-
-
     @Then("an ActorResponse is returned")
     public void anActorResponseIsReturn() {
         Assertions.assertNotNull(actualOutput);
@@ -108,5 +103,73 @@ public class ActorControllerStepDefs {
     public void anActorResponseOutputIsReturned() {
 //        Assertions.assertNotNull(actor);
         Assertions.assertNull(caughtException);
+    }
+
+
+    FilmService mockFilmService;
+    FilmController filmController;
+    FilmResponse actualFilmOutput;
+    FilmInput filmInput;
+    Film film;
+
+    // Film Controller Step Defs
+
+    @Given("a film exists with ID {short}")
+    public void aFilmExistsWithID(short filmId) {
+        final var film = new Film();
+        final var filmResponse = new FilmResponse(film);
+        doReturn(filmResponse)
+                .when(mockFilmService)
+                .readFilmById(filmId);
+    }
+
+    @When("a GET request is made to films for ID {short}")
+    public void aGETRequestIsMadeToFilmsForID(short filmId) {
+        try {
+            actualFilmOutput = filmController.readFilmById(filmId);
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
+    }
+
+    @Then("a FilmResponse is returned")
+    public void aFilmResponseIsReturned() {
+        Assertions.assertNotNull(actualFilmOutput);
+        Assertions.assertNull(caughtException);
+    }
+
+    @Given("no film exists with ID {short}")
+    public void noFilmExistsWithID(short filmId) {
+        doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND))
+                .when(mockFilmService)
+                .readFilmById(filmId);
+    }
+
+    @Given("a valid FilmInput request body")
+    public void aValidFilmInputRequestBody() {
+        filmInput = new FilmInput();
+    }
+//    Does this show something wrong with my FilmInput?
+
+    @When("a POST request is made to the films collection")
+    public void aPOSTRequestIsMadeToTheFilmsCollection() {
+        try {
+            film = mockFilmService.createFilm(film);
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
+    }
+
+//    @Given("an invalid FilmInput request body")
+//    public void anInvalidFilmInputRequestBody() {
+//    }
+
+    @When("a DELETE request is made to the films collection for ID {short}")
+    public void aDELETERequestIsMadeToTheFilmsCollectionForID(short filmId) {
+        try {
+            mockFilmService.deleteFilm(filmId);
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
     }
 }

@@ -19,7 +19,6 @@ public class Film {
     private short id;
 
     @Setter
-//    @NotNull
     @Column(name = "title")
     private String title;
 
@@ -31,9 +30,9 @@ public class Film {
     @Column(name = "release_year")
     private int release_year;
 
-//    @Getter
+//    @Setter
 //    @Column(name = "language_id")
-//    private short language_id;
+//    private Short language_id;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
