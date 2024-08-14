@@ -31,7 +31,7 @@ class SakilaDemoProjectApplicationTests {
     }
 
     @Test
-    public void actorControllerReadActorByIdReturnsExistingActor() {
+    protected void actorControllerReadActorByIdReturnsExistingActor() {
         final var expectedFirstName = "fName";
         final var expectedLastName = "lName";
 
@@ -41,8 +41,8 @@ class SakilaDemoProjectApplicationTests {
         Assertions.assertEquals(expectedLastName, actual.getLastName());
     }
 
-     @Test
-    public void actorControllerReadActorByIdThrows404WhenInvalidId() {
+    @Test
+    protected void actorControllerReadActorByIdThrows404WhenInvalidId() {
         Exception exception = null;
         try {
             actorController.readActorById((short)2);

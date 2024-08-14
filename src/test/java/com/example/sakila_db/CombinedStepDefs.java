@@ -1,6 +1,5 @@
 package com.example.sakila_db;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
