@@ -175,7 +175,7 @@ public class CombinedStepDefs {
     @Given("a film exists with ID {short} and has title {string}")
     public void aFilmExistsWithIDAndHasTitle(short filmId, String title) {
         final var newFilm = new Film();
-        film.setTitle("NewTitle");
+        newFilm.setTitle("NewTitle");
         // This should be (title) but doesn't work, not sure why yet
         final var filmResponse = new FilmResponse(newFilm);
         doReturn(filmResponse)
