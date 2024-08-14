@@ -25,3 +25,8 @@ Feature: FilmController
     Given a film exists with ID 38 and has title "Title"
     When the film with ID 38 is updated to have title "NewTitle"
     Then the film with ID 38 has title "NewTitle"
+
+  Scenario: Read all films
+    Given a film exists with ID 1
+    And a film exists with ID 2
+    When a GET request is made to films for all films

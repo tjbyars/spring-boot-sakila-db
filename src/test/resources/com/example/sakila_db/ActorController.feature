@@ -28,3 +28,8 @@ Feature: ActorController
   Scenario: Deleting an actor that does not exist
     Given no actor exists with ID 700
     When a DELETE request is made to the actors collection for ID 700
+
+  Scenario: Read all actors
+    Given an actor exists with ID 1
+    And an actor exists with ID 2
+    When a GET request is made to actors for all actors

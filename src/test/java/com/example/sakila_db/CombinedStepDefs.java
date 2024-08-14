@@ -106,6 +106,15 @@ public class CombinedStepDefs {
         Assertions.assertNull(caughtException);
     }
 
+    @When("a GET request is made to actors for all actors")
+    public void aGETRequestIsMadeToActorsForAllActors() {
+        try {
+            controller.readAllActors();
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
+    }
+
 
     FilmService mockFilmService;
     FilmController filmController;
@@ -196,5 +205,14 @@ public class CombinedStepDefs {
     public void theFilmWithIDHasTitle(short filmId, String title) {
         FilmResponse filmData = mockFilmService.readFilmById(filmId);
         Assertions.assertEquals(title, filmData.getTitle());
+    }
+
+    @When("a GET request is made to films for all films")
+    public void aGETRequestIsMadeToFilmsForAllFilms() {
+        try {
+            filmController.readAllFilms();
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
     }
 }
