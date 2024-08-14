@@ -31,3 +31,8 @@ Feature: FilmController
     Given a film exists with ID 1
     And a film exists with ID 2
     When a GET request is made to films for all films
+
+  Scenario: Use filmController to create, update, and delete
+    Given a film exists with ID 10 Controller
+    When the film with ID 10 is updated to have title "NewTitle" Controller
+    And A DELETE request is made to the films collections for ID 10

@@ -213,4 +213,33 @@ public class CombinedStepDefs {
             caughtException = ex;
         }
     }
+
+    @Given("a film exists with ID {short} Controller")
+    public void aFilmExistsWithIDController(short filmId) {
+        final var newFilm = new Film();
+        final var filmResponse = new FilmResponse(newFilm);
+        filmController.readFilmById(filmId);
+
+        doReturn(filmResponse)
+                .when(mockFilmService)
+                .readFilmById(filmId);
+    }
+
+    @When("the film with ID {short} is updated to have title {string} Controller")
+    public void theFilmWithIDIsUpdatedToHaveTitleController(short filmId, String newTitle) {
+        Film filmData = new Film();
+        filmData.setTitle(newTitle);
+        System.out.println(filmData.getTitle());
+        filmController.updateFilm(filmId, filmData);
+        System.out.println(filmController.readFilmById(filmId).getTitle());
+    }
+
+    @And("A DELETE request is made to the films collections for ID {short}")
+    public void aDELETERequestIsMadeToTheFilmsCollectionsForID(short filmId) {
+        try {
+            filmController.deleteFilm(filmId);
+        } catch (Exception ex) {
+            caughtException = ex;
+        }
+    }
 }
