@@ -119,8 +119,6 @@
 						<exclude>**/*SakilaDemoProjectApplication.*</exclude>
 						<exclude>**/*FilmService.*</exclude>
 						<exclude>**/*ActorService.*</exclude>
-<!--						<exclude>**/*FilmController.*</exclude>-->
-<!--						<exclude>**/*ActorController.*</exclude>-->
 					</excludes>
 				</configuration>
 				<executions>

@@ -30,10 +30,6 @@ public class Film {
     @Column(name = "release_year")
     private int release_year;
 
-//    @Setter
-//    @Column(name = "language_id")
-//    private Short language_id;
-
     @ManyToOne
     @JoinColumn(name = "language_id")
     private Language language;
@@ -70,36 +66,8 @@ public class Film {
     @Column(name = "last_update")
     private Timestamp last_update;
 
-//    @Setter
-//    @Column(name = "category")
-//    private String category;
-
     @ManyToMany(mappedBy = "films")
     private List<Actor> cast = new ArrayList<>();
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "film_category",
-//            joinColumns = {@JoinColumn(name = "film_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "category")}
-//    )
-//    private List<Category> categories = new ArrayList<>();
-
 
 }
-
-/*
-film_id     short
-title       string
-description     string
-release_year    int
-language_id     int
-original_language_id    int
-rental_duration     int
-rental_rate     float
-length      int
-replacement_cost    float
-rating      string - G  PG  PG-13   R   NC-17
-special_features    string - Trailers   Commentaries    Deleted Scenes  Behind the Scenes
-last_update     timestamp
- */

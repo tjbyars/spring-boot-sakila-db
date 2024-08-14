@@ -7,8 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -16,7 +14,6 @@ import static org.mockito.Mockito.*;
 class SakilaDemoProjectApplicationTests {
 
 	private ActorController actorController;
-    private ActorRepository actorRepo;
 
     @BeforeEach
     public void setup() {
@@ -31,18 +28,15 @@ class SakilaDemoProjectApplicationTests {
         doReturn(actorResponse).when(mockService).readActorById((short)1);
 
         actorController = new ActorController(mockService);
-//        actorRepo = new ActorRepository(mockService);
     }
 
     @Test
     public void actorControllerReadActorByIdReturnsExistingActor() {
-//        final var expectedId = (short)1;
         final var expectedFirstName = "fName";
         final var expectedLastName = "lName";
 
         final var actual = actorController.readActorById((short)1);
 
-//        Assertions.assertEquals(expectedId, actual.getId());
         Assertions.assertEquals(expectedFirstName, actual.getFirstName());
         Assertions.assertEquals(expectedLastName, actual.getLastName());
     }
@@ -60,19 +54,4 @@ class SakilaDemoProjectApplicationTests {
         Assertions.assertEquals(HttpStatus.NOT_FOUND,
                 ((ResponseStatusException)exception).getStatusCode());
      }
-
-//    @Test
-//    public void actorControllerCreatesActorAndReturns() {
-//        // compared created actor with existing actor?
-//        Assertions.assertNotNull(mockService.readActorById);
-//    }
-
-
-
-
-//	@Test
-//	void contextLoads() {
-//	}
-
-
 }

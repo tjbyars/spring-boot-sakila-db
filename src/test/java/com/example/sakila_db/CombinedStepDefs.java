@@ -31,13 +31,12 @@ public class CombinedStepDefs {
 
     @Given("an actor exists with ID {short}")
     public void anActorExistsWithID(short actorId) {
-        final var actor = new Actor(actorId, "Joe", "Bloggs", List.of());
-        final var actorResponse = new ActorResponse(actor);
+        final var newActor = new Actor(actorId, "Joe", "Bloggs", List.of());
+        final var actorResponse = new ActorResponse(newActor);
         doReturn(actorResponse)
                 .when(mockService)
                 .readActorById(actorId);
     }
-    // doReturn(Optional.of(actor).when(mockService).readActorById(actorId);
 
     @Given("no actor exists with ID {short}")
     public void noActorExistsWithID(short actorId) {
@@ -104,7 +103,6 @@ public class CombinedStepDefs {
 
     @Then("an ActorResponse output is returned")
     public void anActorResponseOutputIsReturned() {
-//        Assertions.assertNotNull(actor);
         Assertions.assertNull(caughtException);
     }
 
@@ -119,8 +117,8 @@ public class CombinedStepDefs {
 
     @Given("a film exists with ID {short}")
     public void aFilmExistsWithID(short filmId) {
-        final var film = new Film();
-        final var filmResponse = new FilmResponse(film);
+        final var newFilm = new Film();
+        final var filmResponse = new FilmResponse(newFilm);
         doReturn(filmResponse)
                 .when(mockFilmService)
                 .readFilmById(filmId);
@@ -176,10 +174,10 @@ public class CombinedStepDefs {
 
     @Given("a film exists with ID {short} and has title {string}")
     public void aFilmExistsWithIDAndHasTitle(short filmId, String title) {
-        final var film = new Film();
+        final var newFilm = new Film();
         film.setTitle("NewTitle");
         // This should be (title) but doesn't work, not sure why yet
-        final var filmResponse = new FilmResponse(film);
+        final var filmResponse = new FilmResponse(newFilm);
         doReturn(filmResponse)
                 .when(mockFilmService)
                 .readFilmById(filmId);
