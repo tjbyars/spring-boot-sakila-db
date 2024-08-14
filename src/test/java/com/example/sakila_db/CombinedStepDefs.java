@@ -160,7 +160,6 @@ public class CombinedStepDefs {
                 2005,5, 3.4f,
                 130, 8.5f);
     }
-//    Does this show something wrong with my FilmInput?
 
     @When("a POST request is made to the films collection")
     public void aPOSTRequestIsMadeToTheFilmsCollection() {
