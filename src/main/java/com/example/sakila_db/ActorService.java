@@ -13,8 +13,12 @@ import java.util.List;
 @Transactional
 public class ActorService {
 
-    @Autowired
     private ActorRepository actorRepo;
+
+    @Autowired
+    public ActorService(ActorRepository actorRepo) {
+        this.actorRepo = actorRepo;
+    }
 
     @PutMapping("/actors/{id}")
     public void updateActor(@PathVariable short id, @RequestBody ActorInput actorInput) {
@@ -52,4 +56,3 @@ public class ActorService {
         return actorRepo.save(actor);
     }
 }
-

@@ -15,8 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilmController {
 
+    private FilmService filmService;
+
     @Autowired
-    private final FilmService filmService;
+    public FilmController(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     @PostMapping
     public Film createFilm(@Validated @RequestBody Film film) {

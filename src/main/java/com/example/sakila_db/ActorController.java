@@ -14,8 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActorController {
 
+    private ActorService actorService;
+
     @Autowired
-    private final ActorService actorService;
+    public ActorController(ActorService actorService) {
+        this.actorService = actorService;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

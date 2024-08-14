@@ -17,8 +17,12 @@ import java.util.List;
 @Transactional
 public class FilmService {
 
-    @Autowired
     private FilmRepository filmRepo;
+
+    @Autowired
+    public FilmService(FilmRepository filmRepo) {
+        this.filmRepo = filmRepo;
+    }
 
     @GetMapping("/films")
     public List<FilmResponse> readAllFilms() {
