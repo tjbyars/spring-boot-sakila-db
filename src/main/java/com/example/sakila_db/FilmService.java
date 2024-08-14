@@ -46,17 +46,19 @@ public class FilmService {
         return filmRepo.save(filmRepo.getReferenceById(id));
     }
 
-    @DeleteMapping("/films/{id}")
-    public void deleteFilm(@PathVariable short id) {
-        filmRepo.deleteById(id);
-    }
-
     @PatchMapping("/films/{id}")
-    public Film partUpdateFilm(@PathVariable short id, @RequestBody String json) throws JsonProcessingException {
+    public Film partUpdateFilm(@PathVariable short id, @RequestBody String json)
+            throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Film film = filmRepo.findById(id).orElseThrow();
         ObjectReader objectReader = objectMapper.readerForUpdating(film);
         film = objectReader.readValue(json);
         return filmRepo.save(film);
     }
+
+    @DeleteMapping("/films/{id}")
+    public void deleteFilm(@PathVariable short id) {
+        filmRepo.deleteById(id);
+    }
 }
+

@@ -16,14 +16,6 @@ public class ActorService {
     @Autowired
     private ActorRepository actorRepo;
 
-    @PostMapping
-    public Actor createActor(ActorInput actorData) {
-        final var actor = new Actor();
-        actor.setFirstName(actorData.getFirstName());
-        actor.setLastName(actorData.getLastName());
-        return actorRepo.save(actor);
-    }
-
     @PutMapping("/actors/{id}")
     public void updateActor(@PathVariable short id, @RequestBody ActorInput actorInput) {
         Actor actor = actorRepo.getReferenceById(id);
@@ -52,7 +44,12 @@ public class ActorService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-
-//    public Page<Actor> listActors(Pageable pageable) {
-//    }
+    @PostMapping
+    public Actor createActor(ActorInput actorData) {
+        final var actor = new Actor();
+        actor.setFirstName(actorData.getFirstName());
+        actor.setLastName(actorData.getLastName());
+        return actorRepo.save(actor);
+    }
 }
+

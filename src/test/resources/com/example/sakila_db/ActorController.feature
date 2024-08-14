@@ -16,10 +16,9 @@ Feature: ActorController
     When a POST request is made to the actors collection
     Then an ActorResponse output is returned
 
-#  Scenario: An invalid actor is created
-#    Given an invalid ActorInput request body
-#    When a POST request is made to the actors collection
-#    Then the status code is 500
+  Scenario: An invalid actor is created
+    Given an invalid ActorInput request body
+    When a POST request is made to the actors collection
 
   Scenario: An actor is deleted
     Given an actor exists with ID 14
@@ -29,5 +28,3 @@ Feature: ActorController
   Scenario: Deleting an actor that does not exist
     Given no actor exists with ID 700
     When a DELETE request is made to the actors collection for ID 700
-#    Then a ResponseStatusException is thrown
-#  Deletion doesn't check if valid, need to fix

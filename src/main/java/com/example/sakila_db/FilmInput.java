@@ -59,5 +59,16 @@ public class FilmInput {
 
     @NotNull
     private Timestamp last_update;
-//    private String category;
+
+    public FilmInput(String title, String description, int release_year,
+                     int rental_duration, float rental_rate, int length,
+                     float replacement_cost) {
+        this.title = title;
+        this.description = description;
+        this.release_year = release_year;
+        this.rental_duration = rental_duration;
+        this.rental_rate = rental_rate;
+        this.length = length;
+        this.replacement_cost = replacement_cost;
+    }
 }

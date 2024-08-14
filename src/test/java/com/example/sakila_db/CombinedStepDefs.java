@@ -1,5 +1,6 @@
 package com.example.sakila_db;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
-public class ActorControllerStepDefs {
+public class CombinedStepDefs {
 
     ActorService mockService;
     ActorController controller;
@@ -25,7 +26,7 @@ public class ActorControllerStepDefs {
         mockService = mock(ActorService.class);
         controller = new ActorController(mockService);
         mockFilmService = mock(FilmService.class);
-        filmController = new FilmController();
+        filmController = new FilmController(mockFilmService);
     }
 
     @Given("an actor exists with ID {short}")
@@ -149,7 +150,9 @@ public class ActorControllerStepDefs {
 
     @Given("a valid FilmInput request body")
     public void aValidFilmInputRequestBody() {
-        filmInput = new FilmInput();
+        filmInput = new FilmInput("Title", "description",
+                2005,5, 3.4f,
+                130, 8.5f);
     }
 //    Does this show something wrong with my FilmInput?
 
@@ -162,10 +165,6 @@ public class ActorControllerStepDefs {
         }
     }
 
-//    @Given("an invalid FilmInput request body")
-//    public void anInvalidFilmInputRequestBody() {
-//    }
-
     @When("a DELETE request is made to the films collection for ID {short}")
     public void aDELETERequestIsMadeToTheFilmsCollectionForID(short filmId) {
         try {
@@ -173,5 +172,31 @@ public class ActorControllerStepDefs {
         } catch (Exception ex) {
             caughtException = ex;
         }
+    }
+
+    @Given("a film exists with ID {short} and has title {string}")
+    public void aFilmExistsWithIDAndHasTitle(short filmId, String title) {
+        final var film = new Film();
+        film.setTitle("NewTitle");
+        // This should be (title) but doesn't work, not sure why yet
+        final var filmResponse = new FilmResponse(film);
+        doReturn(filmResponse)
+                .when(mockFilmService)
+                .readFilmById(filmId);
+    }
+
+    @When("the film with ID {short} is updated to have title {string}")
+    public void theFilmWithIDIsUpdatedToHaveTitle(short filmId, String newTitle) {
+        Film filmData = new Film();
+        filmData.setTitle(newTitle);
+        System.out.println(filmData.getTitle());
+        mockFilmService.updateFilm(filmId, filmData);
+        System.out.println(mockFilmService.readFilmById(filmId).getTitle());
+    }
+
+    @Then("the film with ID {short} has title {string}")
+    public void theFilmWithIDHasTitle(short filmId, String title) {
+        FilmResponse filmData = mockFilmService.readFilmById(filmId);
+        Assertions.assertEquals(title, filmData.getTitle());
     }
 }

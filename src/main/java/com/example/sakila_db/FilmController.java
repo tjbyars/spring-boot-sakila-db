@@ -1,6 +1,7 @@
 package com.example.sakila_db;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -11,20 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/films")
 @CrossOrigin
+@RequiredArgsConstructor
 public class FilmController {
 
     @Autowired
-    private FilmService filmService;
-
-//    @GetMapping("/films")
-//    public List<Film> readAll() {
-//        return filmRepo.findAll();
-//    }
-//
-//    @GetMapping("/films/{id}")
-//    public Film readFilm(@PathVariable short id) {
-//        return filmRepo.findById(id).get();
-//    }
+    private final FilmService filmService;
 
     @PostMapping
     public Film createFilm(@Validated @RequestBody Film film) {
@@ -32,9 +24,10 @@ public class FilmController {
     }
 
     @PutMapping("/{id}")
-    public Film updateFilm(@PathVariable short id,
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateFilm(@PathVariable short id,
                            @RequestBody Film filmData) {
-        return filmService.updateFilm(id, filmData);
+        filmService.updateFilm(id, filmData);
     }
 
     @DeleteMapping("/{id}")
