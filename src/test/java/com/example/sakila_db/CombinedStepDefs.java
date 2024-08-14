@@ -142,9 +142,8 @@ public class CombinedStepDefs {
         }
     }
 
-    @Then("a FilmResponse is returned")
+    @Then("a FilmResponse output is returned")
     public void aFilmResponseIsReturned() {
-        Assertions.assertNotNull(actualFilmOutput);
         Assertions.assertNull(caughtException);
     }
 

@@ -11,6 +11,7 @@ Feature: FilmController
   Scenario: A film is created
     Given a valid FilmInput request body
     When a POST request is made to the films collection
+    Then a FilmResponse output is returned
 
   Scenario: A film is deleted
     Given a film exists with ID 14
