@@ -45,7 +45,6 @@ class SakilaDemoProjectApplicationTests {
         film.setReplacement_cost(6f);
         film.setRating("G");
         film.setSpecial_features("Trailers");
-//        Timestamp timestamp = new Timestamp(2006, 02, 15, 03, 26, 35, 20);
         Timestamp timestamp = new Timestamp(1124103810000L);
         film.setLast_update(timestamp);
         final var filmResponse = new FilmResponse(film);
