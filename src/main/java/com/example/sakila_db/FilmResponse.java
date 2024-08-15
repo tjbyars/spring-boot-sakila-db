@@ -12,7 +12,7 @@ public class FilmResponse {
     private final String description;
     private final List<PartialActorResponse> cast;
     private final int release_year;
-    private final Language language_id;
+    private final Short language_id;
     private final Short original_language_id;
     private final int rental_duration;
     private final float rental_rate;
@@ -31,7 +31,7 @@ public class FilmResponse {
                 .map(PartialActorResponse::new)
                 .toList();
         this.release_year = film.getRelease_year();
-        this.language_id = film.getLanguage();
+        this.language_id = film.getLanguage_id();
         this.original_language_id = film.getOriginal_language_id();
         this.rental_duration = film.getRental_duration();
         this.rental_rate = film.getRental_rate();

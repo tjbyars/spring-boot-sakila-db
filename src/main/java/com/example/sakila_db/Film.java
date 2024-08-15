@@ -30,9 +30,9 @@ public class Film {
     @Column(name = "release_year")
     private int release_year;
 
-    @ManyToOne
-    @JoinColumn(name = "language_id")
-    private Language language;
+    @Setter
+    @Column(name = "language_id")
+    private Short language_id;
 
     @Nullable
     @Column(name = "original_language_id", insertable = false, updatable = false)
@@ -68,6 +68,4 @@ public class Film {
 
     @ManyToMany(mappedBy = "films")
     private List<Actor> cast = new ArrayList<>();
-
-
 }
