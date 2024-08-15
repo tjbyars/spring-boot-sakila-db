@@ -43,6 +43,7 @@ class SakilaDemoProjectApplicationTests {
         film.setRental_rate(4f);
         film.setLength(120);
         film.setReplacement_cost(6f);
+        film.setRating("G");
         film.setSpecial_features("Trailers");
         Timestamp timestamp = new Timestamp(2006, 02, 15, 03, 26, 35, 20);
         film.setLast_update(timestamp);
