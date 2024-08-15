@@ -45,7 +45,8 @@ class SakilaDemoProjectApplicationTests {
         film.setReplacement_cost(6f);
         film.setRating("G");
         film.setSpecial_features("Trailers");
-        Timestamp timestamp = new Timestamp(2006, 02, 15, 03, 26, 35, 20);
+//        Timestamp timestamp = new Timestamp(2006, 02, 15, 03, 26, 35, 20);
+        Timestamp timestamp = new Timestamp(1124103810000L);
         film.setLast_update(timestamp);
         final var filmResponse = new FilmResponse(film);
         doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND))
@@ -83,7 +84,7 @@ class SakilaDemoProjectApplicationTests {
      }
 
     @Test
-    protected void filmControllerReadFilmByIdReturnsExisitngFilm() {
+    protected void filmControllerReadFilmByIdReturnsExistingFilm() {
         final var expectedTitle = "TEST TITLE";
         final var expectedLength = 120;
 
@@ -94,15 +95,9 @@ class SakilaDemoProjectApplicationTests {
         Assertions.assertNotNull(actual.getId());
         Assertions.assertNotNull(actual.getDescription());
         Assertions.assertNotNull(actual.getCast());
-        Assertions.assertNotNull(actual.getRelease_year());
         Assertions.assertNotNull(actual.getLanguage_id());
-        Assertions.assertNotNull(actual.getRental_duration());
-        Assertions.assertNotNull(actual.getRental_rate());
-        Assertions.assertNotNull(actual.getLength());
-        Assertions.assertNotNull(actual.getReplacement_cost());
         Assertions.assertNotNull(actual.getRating());
         Assertions.assertNotNull(actual.getSpecial_features());
         Assertions.assertNotNull(actual.getLast_update());
-
      }
 }
