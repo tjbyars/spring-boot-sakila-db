@@ -22,10 +22,12 @@ public class Film {
     @Column(name = "title")
     private String title;
 
+    @Nullable
     @Setter
     @Column(name = "description")
     private String description;
 
+    @Nullable
     @Setter
     @Column(name = "release_year")
     private int release_year;
@@ -46,6 +48,7 @@ public class Film {
     @Column(name = "rental_rate")
     private float rental_rate;
 
+    @Nullable
     @Setter
     @Column(name = "length")
     private int length;
@@ -54,10 +57,12 @@ public class Film {
     @Column(name = "replacement_cost")
     private float replacement_cost;
 
+    @Nullable
     @Setter
     @Column(name = "rating")
     private String rating;
 
+    @Nullable
     @Setter
     @Column(name = "special_features")
     private String special_features;
@@ -66,6 +71,7 @@ public class Film {
     @Column(name = "last_update")
     private Timestamp last_update;
 
+    @Nullable
     @ManyToMany(mappedBy = "films")
     private List<Actor> cast = new ArrayList<>();
 }
